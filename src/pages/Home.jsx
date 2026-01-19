@@ -83,15 +83,17 @@ export default function Home() {
     <>
       <Nav />
 
-        <section className="p-6 w-full flex flex-col items-center">
+        <section className="p-6 w-full flex flex-col items-center flex">
             {/* INTRO */}
             <div ref={introRef} className="w-[70%] mt-32 flex">
-                <div className="w-1/2"></div>
                 <div className="w-1/2">
-                    <h1 className="text-4xl font-bold">
-                        Nos sentamos a entender tu caso y armamos un plan que tenga sentido para tu negocio.
-                    </h1>
-                    <h2 className="mt-2 text-gray-600">Después lo ejecutamos con vos: campañas, contenido y seguimiento, con métricas claras.</h2>
+                  <h1 className="text-5xl font-bold">
+                      Nos sentamos a entender tu caso y armamos un plan que tenga sentido para tu negocio.
+                  </h1>
+                  <h2 className="mt-2 text-3xl text-gray-600">Después lo ejecutamos con vos: campañas, contenido y seguimiento, con métricas claras.</h2>
+                </div>
+                <div className="w-1/2 flex justify-center">
+                  <img className="w-2/3 h-fit" src="/img/hero.png" alt=""/>
                 </div>
             </div>
 
