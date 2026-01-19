@@ -85,20 +85,20 @@ export default function Home() {
 
         <section className="p-6 w-full flex flex-col items-center flex">
             {/* INTRO */}
-            <div ref={introRef} className="w-[70%] mt-32 flex">
-                <div className="w-1/2">
+            <div ref={introRef} className="w-[90%] md:w-[70%] mt-24 md:mt-32 flex flex-col-reverse md:flex-row ">
+                <div className="w-full md:w-1/2">
                   <h1 className="text-5xl font-bold">
                       Nos sentamos a entender tu caso y armamos un plan que tenga sentido para tu negocio.
                   </h1>
                   <h2 className="mt-2 text-3xl text-gray-600">Después lo ejecutamos con vos: campañas, contenido y seguimiento, con métricas claras.</h2>
                 </div>
-                <div className="w-1/2 flex justify-center">
+                <div className="w-full md:w-1/2 flex md:justify-center">
                   <img className="w-2/3 h-fit" src="/img/hero.png" alt=""/>
                 </div>
             </div>
 
             {/* CARDS */}
-            <div className="w-[70%] mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="w-[90%] md:w-[70%] mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((_, i) => (
                 <div
                 key={i}
