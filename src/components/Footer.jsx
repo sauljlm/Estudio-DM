@@ -32,9 +32,6 @@ export default function Footer() {
                             <li>
                                 <a href="tel:+50683649226" className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">Teléfono: +506 8364 9226</a>
                             </li>
-                            <li>
-                                <p className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">Dirección: Cartago, La Unión, La Carpintera</p>
-                            </li>
                         </ul>
                     </div>
                     <div className="text-center md:text-left">
