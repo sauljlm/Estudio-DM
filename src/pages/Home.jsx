@@ -108,19 +108,6 @@ export default function Home() {
         }),
       once: true,
     });
-  
-    // gsap.from(cards, {
-    //   y: 50,
-    //   autoAlpha: 0,
-    //   duration: 1,
-    //   ease: "power2.out",
-    //   stagger: 0.2, 
-    //   scrollTrigger: {
-    //     trigger: cards[0],
-    //     start: "top 85%",
-    //     toggleActions: "play none none reverse",
-    //   },
-    // });
 
     return () => {
       split.revert();
@@ -155,7 +142,7 @@ export default function Home() {
             <section className="w-[90%] md:w-[70%] mt-20 md:mt-32 flex flex-col">
                 <div className="flex justify-between mb-5 flex-col md:flex-row">
                   <div ref={headingRef}>
-                    <h3 className="">Lo que nos diferencia</h3>
+                    <h3>Lo que nos diferencia</h3>
                     <h2
                       className="text-4xl font-bold mb-4 md:mb-8"
                     >
@@ -172,6 +159,7 @@ export default function Home() {
                     <ServiceCard
                       key={service.id}
                       ref={el => (cardsRef.current[i] = el)}
+                      subtitle={service.subtitle}
                       title={service.title}
                       description={service.description}
                       items={service.items}
