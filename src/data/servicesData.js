@@ -1,8 +1,8 @@
 export const services = [
     {
       id: "presencia",
-      title: "Presencia y Orden",
-      subtitle: "",
+      title: "Plan Básico",
+      subtitle: "Presencia y Orden",
       description:
         "Ideal para marcas que buscan una base sólida y una comunicación coherente.",
       items: [
@@ -15,7 +15,8 @@ export const services = [
     },
     {
       id: "crecimiento",
-      title: "Crecimiento y Consistencia",
+      title: "Plan Estandard",
+      subtitle: "Crecimiento y Consistencia",
       description:
         "Pensado para negocios que necesitan escalar resultados de forma sostenida.",
       items: [
@@ -29,7 +30,8 @@ export const services = [
     },
     {
       id: "performance",
-      title: "Dominio y Performance",
+      title: "Plan Premium",
+      subtitle: "Dominio y Performance",
       description:
         "Para marcas que buscan maximizar resultados y optimizar cada punto del embudo.",
       items: [
