@@ -2,16 +2,23 @@ import { useEffect, useRef } from "react";
 import Nav from "../components/Nav";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
+import Button from "../components/Button";
+import ServiceCard from "../components/ServiceCard";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import Button from "../components/Button";
+import { services } from "../data/servicesData";
 
 export default function Home() {
   const introRef = useRef(null);
   const titleRef = useRef(null);
+
+  const headingRef = useRef(null);
+  const textRef = useRef(null);
+
   const cardsRef = useRef([]);
+  cardsRef.current = [];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -60,25 +67,72 @@ export default function Home() {
     });
 
     // Scroll Cards 
-    cardsRef.current.forEach(card => {
-      gsap.from(card, {
-        y: 50,
-        autoAlpha: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      });
+    const cards = cardsRef.current.filter(Boolean);
+
+    gsap.from(headingRef.current, {
+      x: -50,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: headingRef.current,
+        start: "top 85%",
+      },
     });
+  
+    gsap.from(textRef.current, {
+      x: 50,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "top 85%",
+      },
+    });
+
+    gsap.set(cards, {
+      autoAlpha: 0,
+      y: 50,
+    });
+
+    ScrollTrigger.batch(cards, {
+      start: "top 85%",
+      onEnter: batch =>
+        gsap.to(batch, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.2,
+        }),
+      once: true,
+    });
+  
+    // gsap.from(cards, {
+    //   y: 50,
+    //   autoAlpha: 0,
+    //   duration: 1,
+    //   ease: "power2.out",
+    //   stagger: 0.2, 
+    //   scrollTrigger: {
+    //     trigger: cards[0],
+    //     start: "top 85%",
+    //     toggleActions: "play none none reverse",
+    //   },
+    // });
 
     return () => {
       split.revert();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
+  
+  const addToRefs = el => {
+    if (el && !cardsRef.current.includes(el)) {
+      cardsRef.current.push(el);
+    }
+  };
 
   return (
     <>
@@ -100,7 +154,7 @@ export default function Home() {
 
             <section className="w-[90%] md:w-[70%] mt-20 md:mt-32 flex flex-col">
                 <div className="flex justify-between mb-5 flex-col md:flex-row">
-                  <div>
+                  <div ref={headingRef}>
                     <h3 className="">Lo que nos diferencia</h3>
                     <h2
                       className="text-4xl font-bold mb-4 md:mb-8"
@@ -108,59 +162,47 @@ export default function Home() {
                       Nuestros Servicios
                     </h2>
                   </div>
-                  <p className="w-full md:w-[50%]">
+                  <p ref={textRef} className="w-full md:w-[50%]">
                   Impulsamos marcas a través del estrategias de marketing digital enfocadas en crecimiento, orden y performance. Nuestro enfoque combina contenido, pauta publicitaria y análisis de resultados.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <article className="relative rounded-2xl bg-white shadow-lg p-6 md:p-8 flex flex-col">
-                    <h3 className="text-2xl pb-4">Presencia y Orden</h3>
-                    <p className="pb-5">Ideal para marcas que buscan una base sólida y una comunicación coherente.</p>
-                    <ul className="pb-5 list-disc list-inside">
-                      <li>Producción mensual de contenido para redes sociales</li>
-                      <li>Diseño de piezas publicitarias y anuncios básicos</li>
-                      <li>Gestión de campañas publicitarias en una plataforma</li>
-                      <li>Segmentación inicial de audiencias</li>
-                      <li>Reporte mensual con métricas clave y recomendaciones</li>
-                    </ul>
-                    <Button variant="secondary" className="mt-auto">Contáctenos</Button>
-                  </article>
-                  <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8 flex flex-col">
-                    <h3 className="text-2xl pb-4">Crecimiento y Consistencia</h3>
-                    <p className="pb-5">Pensado para negocios que necesitan escalar resultados de forma sostenida.</p>
-                    <ul className="pb-5 list-disc list-inside">
-                      <li>Calendario estratégico de contenido y anuncios</li>
-                      <li>Creatividad visual y video para múltiples formatos</li>
-                      <li>Gestión de campañas en una o más plataformas</li>
-                      <li>Segmentación avanzada y audiencias similares</li>
-                      <li>Análisis de ROI y métricas con seguimiento mensual</li>
-                      <li>Landing page enfocada en conversión</li>
-                    </ul>
-                    <Button variant="secondary" className="mt-auto">Contáctenos</Button>
-                  </article>
-                  <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8 flex flex-col">
-                    <h3 className="text-2xl pb-4">Dominio y Performance</h3>
-                    <p className="pb-5">Para marcas que buscan maximizar resultados y optimizar cada punto del embudo</p>
-                    <ul className="pb-5 list-disc list-inside">
-                      <li>Estrategia integral de contenido y performance</li>
-                      <li>Creatividades optimizadas con testing A/B</li>
-                      <li>Gestión avanzada de campañas y remarketing</li>
-                      <li>Segmentación estructurada y análisis continuo</li>
-                      <li>Dashboard de métricas en tiempo real</li>
-                      <li>Desarrollo web enfocado en conversión</li>
-                    </ul>
-                    <Button variant="secondary" className="mt-auto">Contáctenos</Button>
-                  </article>
+                  {services.map((service, i) => (
+                    <ServiceCard
+                      key={service.id}
+                      ref={el => (cardsRef.current[i] = el)}
+                      title={service.title}
+                      description={service.description}
+                      items={service.items}
+                    />
+                  ))}
                 </div>
             </section>
+            
+            {/* <section ref={addToRefs}></section> */}
+            {/* <section>
+              <div className="flex justify-between mb-5 flex-col md:flex-row">
+                <div ref={headingRef}>
+                  <h3 className="">Lo que nos diferencia</h3>
+                  <h2
+                    className="text-4xl font-bold mb-4 md:mb-8"
+                  >
+                    Nuestros Servicios
+                  </h2>
+                </div>
+                <p ref={textRef} className="w-full md:w-[50%]">
+                Impulsamos marcas a través del estrategias de marketing digital enfocadas en crecimiento, orden y performance. Nuestro enfoque combina contenido, pauta publicitaria y análisis de resultados.
+                </p>
+              </div>
+            </section> */}
 
             {/* CARDS */}
             <section className="w-[90%] md:w-[70%] mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((_, i) => (
                 <div
                 key={i}
-                ref={el => (cardsRef.current[i] = el)}
+                //ref={el => (cardsRef.current[i] = el)}
                 >
                 <Card />
                 </div>
