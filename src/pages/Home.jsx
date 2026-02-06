@@ -12,10 +12,7 @@ import { services } from "../data/servicesData";
 
 export default function Home() {
   const introRef = useRef(null);
-  const titleRef = useRef(null);
-
-  const headingRef = useRef(null);
-  const textRef = useRef(null);
+  const aboutUsRef = useRef(null);
 
   const cardsRef = useRef([]);
   cardsRef.current = [];
@@ -47,48 +44,33 @@ export default function Home() {
     },
     0.2);
 
-    // Scroll titles
-    const split = new SplitText(titleRef.current, {
-      type: "words"
-    });
-
-    gsap.from(split.words, {
-      y: 35,
-      autoAlpha: 0,
-      filter: "blur(4px)",
-      stagger: 0.08,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: titleRef.current,
-        start: "top 90%",
-        toggleActions: "play none none none",
-        once: true
-      }
-    });
-
     // Scroll Cards 
     const cards = cardsRef.current.filter(Boolean);
 
-    gsap.from(headingRef.current, {
-      x: -50,
-      autoAlpha: 0,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: headingRef.current,
-        start: "top 85%",
-      },
+    gsap.utils.toArray(".heading-anim").forEach(el => {
+      gsap.from(el, {
+        x: -50,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+        },
+      });
     });
   
-    gsap.from(textRef.current, {
-      x: 50,
-      autoAlpha: 0,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top 85%",
-      },
+    gsap.utils.toArray(".text-anim").forEach(el => {
+      gsap.from(el, {
+        x: 50,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+        },
+      });
     });
 
     gsap.set(cards, {
@@ -107,6 +89,17 @@ export default function Home() {
           stagger: 0.2,
         }),
       once: true,
+    });
+
+    gsap.from(aboutUsRef.current, {
+      y: 50,
+      autoAlpha: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: aboutUsRef.current,
+        start: "top 85%",
+      }
     });
 
     return () => {
@@ -141,7 +134,7 @@ export default function Home() {
 
             <section className="w-[90%] md:w-[70%] mt-20 md:mt-32 flex flex-col">
                 <div className="flex justify-between mb-5 flex-col md:flex-row">
-                  <div ref={headingRef}>
+                  <div className="heading-anim">
                     <h3>Lo que nos diferencia</h3>
                     <h2
                       className="text-4xl font-bold mb-4 md:mb-8"
@@ -149,7 +142,7 @@ export default function Home() {
                       Nuestros Servicios
                     </h2>
                   </div>
-                  <p ref={textRef} className="w-full md:w-[50%]">
+                  <p className="text-anim w-full md:w-[50%]">
                   Impulsamos marcas a través del estrategias de marketing digital enfocadas en crecimiento, orden y performance. Nuestro enfoque combina contenido, pauta publicitaria y análisis de resultados.
                   </p>
                 </div>
@@ -169,21 +162,58 @@ export default function Home() {
             </section>
             
             {/* <section ref={addToRefs}></section> */}
-            {/* <section>
-              <div className="flex justify-between mb-5 flex-col md:flex-row">
-                <div ref={headingRef}>
-                  <h3 className="">Lo que nos diferencia</h3>
-                  <h2
-                    className="text-4xl font-bold mb-4 md:mb-8"
-                  >
-                    Nuestros Servicios
+            <section className="w-[90%] md:w-[70%] mt-24 md:mt-32 mx-auto">
+              {/* Header */}
+              <div className="flex flex-col justify-between mb-12 gap-6">
+                <div ref={aboutUsRef} className="w-full flex items-center flex-col">
+                  <h3 className="tracking-wide text-gray-500">
+                    Sobre nosotros
+                  </h3>
+                  <h2 className="text-4xl font-bold mt-2 text-center">
+                    Estrategia, creatividad y performance
                   </h2>
+                  <p className="md:w-[70%] text-gray-600 text-center leading-relaxed mt-4">
+                  Somos una empresa costarricense con presencia en Costa Rica, República Dominicana y España, enfocada en construir marcas con orden, criterio y resultados.
+                  Creemos en un trabajo limpio y estratégico, que eleve la estética de cada proyecto sin perder efectividad.
+                  Más allá del diseño, fortalecemos continuamente nuestras capacidades para ofrecer un acompañamiento integral.
+                  </p>
                 </div>
-                <p ref={textRef} className="w-full md:w-[50%]">
-                Impulsamos marcas a través del estrategias de marketing digital enfocadas en crecimiento, orden y performance. Nuestro enfoque combina contenido, pauta publicitaria y análisis de resultados.
-                </p>
               </div>
-            </section> */}
+
+              {/* Pilares */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
+                  <h4 className="text-xl font-semibold mb-3">Estrategia</h4>
+                  <p className="text-gray-600">
+                    Analizamos el negocio, la audiencia y los objetivos antes de ejecutar
+                    cualquier acción.
+                  </p>
+                </article>
+
+                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
+                  <h4 className="text-xl font-semibold mb-3">Creatividad</h4>
+                  <p className="text-gray-600">
+                    Diseñamos contenido y anuncios pensados para comunicar con claridad
+                    y convertir.
+                  </p>
+                </article>
+
+                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
+                  <h4 className="text-xl font-semibold mb-3">Performance</h4>
+                  <p className="text-gray-600">
+                    Medimos, optimizamos y escalamos con foco en resultados reales y
+                    sostenibles.
+                  </p>
+                </article>
+              </div>
+
+              {/* CTA */}
+              <div className="flex justify-center mt-14">
+                <Button variant="secondary">
+                  Contáctenos
+                </Button>
+              </div>
+            </section>
 
             {/* CARDS */}
             <section className="w-[90%] md:w-[70%] mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">

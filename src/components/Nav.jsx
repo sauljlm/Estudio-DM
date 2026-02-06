@@ -6,8 +6,8 @@ export default function Navbar() {
 
   const navigation = [
     { title: "Portafolio", path: "/#portfolio" },
+    { title: "Nuestros Servicios", path: "/#our-services" },
     { title: "Sobre Nosotros", path: "/about-us" },
-    { title: "Nuestros Servicios", path: "/our-services" },
     { title: "Q&A", path: "/q-y-a" },
     { title: "Contacto", path: "/contact" }
   ];
@@ -49,7 +49,7 @@ export default function Navbar() {
             className={`
             absolute md:static top-16 left-0 w-full
             bg-neutral-100 md:bg-transparent
-            md:px-0 px-6 h-screen
+            md:px-0 px-6 h-screen md:h-16
             flex-col md:flex-row
             flex justify-between items-center
             transition-all

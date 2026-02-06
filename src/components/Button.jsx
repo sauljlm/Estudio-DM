@@ -12,15 +12,16 @@ export default function Button({
     const variants = {
         primary: `
           bg-black text-white
-          [--liquid-button-color:#656DFC]
+          [--liquid-button-color:#FF6434]
           hover:text-white
         `,
         secondary: `
-          bg-white text-[#656DFC] border border-black
-          [--liquid-button-color:#656DFC]
+          bg-white text-[#000] border border-#FF6434
+          [--liquid-button-color:#FF6434]
           hover:text-white
         `,
     };
+    // FD802C
     
     return (
     <button
