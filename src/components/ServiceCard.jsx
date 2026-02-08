@@ -7,7 +7,7 @@ const ServiceCard = forwardRef(({ subtitle, title, description, items }, ref) =>
   return (
     <article
       ref={ref}
-      className="rounded-2xl bg-white shadow-lg p-6 md:p-8 flex flex-col"
+      className="rounded-2xl bg-white shadow-lg p-6 md:p-8 flex flex-col transition-transform duration-300 transform-gpu hover:-translate-y-3 hover:shadow-xl"
     >
       <h4 className="text-sm">{subtitle}</h4>
       <h3 className="text-3xl pb-4">{title}</h3>

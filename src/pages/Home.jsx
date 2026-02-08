@@ -4,18 +4,22 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import ServiceCard from "../components/ServiceCard";
+import AboutUsCard from "../components/AboutUsCard";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { services } from "../data/servicesData";
+import { aboutUs } from "../data/aboutUsData";
 
 export default function Home() {
   const introRef = useRef(null);
-  const aboutUsRef = useRef(null);
+  const aboutUsHeadRef = useRef(null);
+  const servicesRef = useRef([]);
+  const aboutRef = useRef([]);
 
-  const cardsRef = useRef([]);
-  cardsRef.current = [];
+  servicesRef.current = [];
+  aboutRef.current = [];
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -45,7 +49,10 @@ export default function Home() {
     0.2);
 
     // Scroll Cards 
-    const cards = cardsRef.current.filter(Boolean);
+    const cards = [
+      ...servicesRef.current,
+      ...aboutRef.current
+    ].filter(Boolean);
 
     gsap.utils.toArray(".heading-anim").forEach(el => {
       gsap.from(el, {
@@ -87,17 +94,18 @@ export default function Home() {
           duration: 0.8,
           ease: "power2.out",
           stagger: 0.2,
+          clearProps: "transform"
         }),
       once: true,
     });
 
-    gsap.from(aboutUsRef.current, {
+    gsap.from(aboutUsHeadRef.current, {
       y: 50,
       autoAlpha: 0,
       duration: 0.8,
       ease: "power2.out",
       scrollTrigger: {
-        trigger: aboutUsRef.current,
+        trigger: aboutUsHeadRef.current,
         start: "top 85%",
       }
     });
@@ -151,7 +159,7 @@ export default function Home() {
                   {services.map((service, i) => (
                     <ServiceCard
                       key={service.id}
-                      ref={el => (cardsRef.current[i] = el)}
+                      ref={el => (servicesRef.current[i] = el)}
                       subtitle={service.subtitle}
                       title={service.title}
                       description={service.description}
@@ -163,9 +171,8 @@ export default function Home() {
             
             {/* <section ref={addToRefs}></section> */}
             <section className="w-[90%] md:w-[70%] mt-24 md:mt-32 mx-auto">
-              {/* Header */}
               <div className="flex flex-col justify-between mb-12 gap-6">
-                <div ref={aboutUsRef} className="w-full flex items-center flex-col">
+                <div ref={aboutUsHeadRef} className="w-full flex items-center flex-col">
                   <h3 className="tracking-wide text-gray-500">
                     Sobre nosotros
                   </h3>
@@ -180,34 +187,18 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Pilares */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
-                  <h4 className="text-xl font-semibold mb-3">Estrategia</h4>
-                  <p className="text-gray-600">
-                    Analizamos el negocio, la audiencia y los objetivos antes de ejecutar
-                    cualquier acción.
-                  </p>
-                </article>
-
-                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
-                  <h4 className="text-xl font-semibold mb-3">Creatividad</h4>
-                  <p className="text-gray-600">
-                    Diseñamos contenido y anuncios pensados para comunicar con claridad
-                    y convertir.
-                  </p>
-                </article>
-
-                <article className="rounded-2xl bg-white shadow-lg p-6 md:p-8">
-                  <h4 className="text-xl font-semibold mb-3">Performance</h4>
-                  <p className="text-gray-600">
-                    Medimos, optimizamos y escalamos con foco en resultados reales y
-                    sostenibles.
-                  </p>
-                </article>
+                {aboutUs.map((item, i) => (
+                  <AboutUsCard
+                    key={item.id}
+                    ref={el => (aboutRef.current[i] = el)}
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                  />
+                ))}
               </div>
 
-              {/* CTA */}
               <div className="flex justify-center mt-14">
                 <Button variant="secondary">
                   Contáctenos
