@@ -5,10 +5,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navigation = [
-    { title: "Portafolio", path: "/#portfolio" },
-    { title: "Nuestros Servicios", path: "/#our-services" },
-    { title: "Sobre Nosotros", path: "/about-us" },
-    { title: "Q&A", path: "/q-y-a" },
+    { title: "Portafolio", path: "#portfolio" },
+    { title: "Nuestros Servicios", path: "#our-services" },
+    { title: "Sobre Nosotros", path: "#about-us" },
+    { title: "Q&A", path: "#q-y-a" },
     { title: "Contacto", path: "/contact" }
   ];
 
