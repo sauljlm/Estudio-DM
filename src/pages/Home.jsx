@@ -3,6 +3,7 @@ import Nav from "../components/Nav";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
+import PlanCard from "../components/PlanCard";
 import ServiceCard from "../components/ServiceCard";
 import AboutUsCard from "../components/AboutUsCard";
 import AnimatedCard from "../components/animation/AnimatedCard"
@@ -15,6 +16,7 @@ import { aboutUs } from "../data/aboutUsData";
 
 export default function Home() {
   const introRef = useRef(null);
+  const bannerRef = useRef(null);
   const aboutUsHeadRef = useRef(null);
   const servicesRef = useRef([]);
   const aboutRef = useRef([]);
@@ -46,8 +48,13 @@ export default function Home() {
         stagger: 0.1,
         filter: "blur(3px)",
         ease: "power2.out"
-    },
-    0.2);
+    },0.2)
+    .from(bannerRef.current, {
+      y: 50,
+      autoAlpha: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.5");
 
     // Scroll Cards 
     const cards = [
@@ -127,14 +134,14 @@ export default function Home() {
       <Nav />
       <div className="p-6 w-full flex flex-col items-center flex bg-neutral-100">
           {/* INTRO */}
-          <section ref={introRef} className="w-[90%] md:w-[70%] mt-24 md:mt-32 flex flex-col ">
-              <div className="w-full md:w-1/2">
-                <h1 className="text-4xl md:text-5xl font-bold">
-                    Nos sentamos a entender tu caso y armamos un plan que tenga sentido para tu negocio.
+          <section ref={introRef} className="w-[90%] md:w-[70%] mt-16 md:mt-32 flex flex-col ">
+              <div className="w-full md:w-3/4">
+                <h1 className="text-3xl md:text-6xl font-bold">
+                  Impulsamos tu negocio con estrategias digitales diseñadas para generar resultados medibles.
                 </h1>
-                <h2 className="mt-2 text-xl md:text-2xl text-gray-600">Después lo ejecutamos con vos: campañas, contenido y seguimiento, con métricas claras.</h2>
+                <h2 className="mt-4 text-l md:text-2xl text-gray-600">Analizamos tu negocio, diseñamos una estrategia a tu medida y la ejecutamos contigo, con campañas, contenido y seguimiento basado en resultados reales con metricas claras.</h2>
               </div>
-              <div className="w-full flex md:justify-center">
+              <div ref={bannerRef} className="w-full flex md:justify-center">
                 <AnimatedCard/>
               </div>
           </section>
@@ -142,9 +149,9 @@ export default function Home() {
           <section className="w-[90%] md:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
-                  <h3>Lo que nos diferencia</h3>
+                  <h3 className="text-gray-600">Lo que nos diferencia</h3>
                   <h2
-                    className="text-2xl md:text-xl font-bold mb-4 md:mb-8"
+                    className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
                   >
                     Nuestros Servicios
                   </h2>
@@ -155,11 +162,37 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {services.map((service, i) => (
-                  <ServiceCard
-                    key={service.id}
+                {console.log(services)}
+                {services.planes.map((plan, i) => (
+                  <PlanCard
+                    key={plan.id}
                     ref={el => (servicesRef.current[i] = el)}
-                    subtitle={service.subtitle}
+                    subtitle={plan.subtitle}
+                    title={plan.title}
+                    description={plan.description}
+                    items={plan.items}
+                  />
+                ))}
+              </div>
+
+              <div className="flex justify-between mb-5 flex-col md:flex-row">
+                <div className="heading-anim">
+                  <h2
+                    className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
+                  >
+                    Servicios individuales
+                  </h2>
+                </div>
+                <p className="text-anim w-full md:w-[50%]">
+                Soluciones específicas diseñadas para cubrir necesidades puntuales de tu marca. Podés contratar servicios individuales o combinarlos para potenciar tus resultados digitales.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                {services.individuales.map((service, i) => (
+                  <ServiceCard
+                    key={i}
+                    ref={el => (servicesRef.current[i] = el)}
                     title={service.title}
                     description={service.description}
                     items={service.items}
@@ -172,7 +205,7 @@ export default function Home() {
           <section id="about-us" className="w-[90%] md:w-[70%] mt-24 md:mt-32 mx-auto">
             <div className="flex flex-col justify-between mb-12 gap-6">
               <div ref={aboutUsHeadRef} className="w-full flex items-center flex-col">
-                <h3 className="tracking-wide text-gray-500">
+                <h3 className="tracking-wide text-gray-600">
                   Sobre nosotros
                 </h3>
                 <h2 className="text-3xl md:text-4xl font-bold mt-2 text-center">
