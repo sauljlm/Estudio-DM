@@ -1,12 +1,13 @@
 import { forwardRef } from "react";
 import Button from "./Button";
 
-const ServiceCard = forwardRef(({ subtitle, title, description, items }, ref) => {
+const PlanCard = forwardRef(({ subtitle, title, description, items }, ref) => {
   const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información%20del%20${title}`;
 
   return (
     <article ref={ref} className="group h-full" >
       <div className="rounded-2xl bg-white h-full shadow-lg p-6 md:p-8 flex flex-col transition-all will-change-transform duration-300 hover:-translate-y-3 hover:shadow-xl">
+        <h4 className="text-sm">{subtitle}</h4>
         <h3 className="text-2xl md:text-3xl pb-4">{title}</h3>
         <p className="pb-5">{description}</p>
 
@@ -32,13 +33,13 @@ const ServiceCard = forwardRef(({ subtitle, title, description, items }, ref) =>
             group-hover:pointer-events-auto
           "
         >
-          <a href={contactUrl} target="_blank" aria-label="Más información del servicio">Más información</a>
+          <a href={contactUrl} target="_blank" aria-label="Más información del plan">Más información</a>
         </Button>
       </div>
     </article>
   );
 });
 
-ServiceCard.displayName = "ServiceCard";
+PlanCard.displayName = "PlanCard";
 
-export default ServiceCard;
+export default PlanCard;
