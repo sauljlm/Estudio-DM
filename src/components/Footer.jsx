@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <footer className="text-gray-700 pt-12" role="contentinfo">
-            <div className="container mx-auto py-12 max-w-7xl">
+            <div className="container mx-auto py-12 w-[90%] xl:w-[70%]">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div className="text-center md:text-left">
                         <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">Información</h3>

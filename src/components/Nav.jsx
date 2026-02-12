@@ -5,17 +5,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navigation = [
-    { title: "Portafolio", path: "#portfolio" },
-    { title: "Nuestros Servicios", path: "#our-services" },
-    { title: "Sobre Nosotros", path: "#about-us" },
-    { title: "Q&A", path: "#q-y-a" },
-    { title: "Contacto", path: "/contact" }
+    { title: "Portafolio", path: "/#portfolio" },
+    { title: "Nuestros Servicios", path: "/#our-services" },
+    { title: "Sobre Nosotros", path: "/#about-us" },
+    { title: "Q&A", path: "/#q-y-a" },
+    { title: "Contacto", path: "/contact-us" }
   ];
 
   return (
     <header className="fixed top-0 left-0 w-full h-16 bg-neutral-100 z-50 flex justify-center">
       <div className="w-full max-w lg:px-0 px-6 md:max-w-5xl xl:max-w-7xl flex items-center justify-between relative">
-        <div className="absolute"><img className="w-[40px]" src="/img/estudio-dm-icon.png" alt=""/></div>
+        <div className="absolute"><a href="/"><img className="w-[40px]" src="/img/estudio-dm-icon.png" alt=""/></a></div>
         <button
             className="ml-auto lg:hidden flex flex-col gap-1"
             onClick={() => setOpen(!open)}
