@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Nav from "../components/Nav";
-import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import PlanCard from "../components/PlanCard";
@@ -18,10 +17,12 @@ export default function Home() {
   const introRef = useRef(null);
   const bannerRef = useRef(null);
   const aboutUsHeadRef = useRef(null);
-  const servicesRef = useRef([]);
+  const planesRef = useRef([]);
+  const individualesRef = useRef([]);
   const aboutRef = useRef([]);
 
-  servicesRef.current = [];
+  planesRef.current = [];
+  individualesRef.current = [];
   aboutRef.current = [];
 
   useEffect(() => {
@@ -54,11 +55,12 @@ export default function Home() {
       autoAlpha: 0,
       duration: 0.8,
       ease: "power2.out"
-    }, "-=0.5");
+    }, "-=2.5");
 
     // Scroll Cards 
     const cards = [
-      ...servicesRef.current,
+      ...planesRef.current,
+      ...individualesRef.current,
       ...aboutRef.current
     ].filter(Boolean);
 
@@ -134,7 +136,7 @@ export default function Home() {
       <Nav />
       <div className="p-6 w-full flex flex-col items-center flex bg-neutral-100">
           {/* INTRO */}
-          <section ref={introRef} className="w-[90%] md:w-[70%] mt-16 md:mt-32 flex flex-col ">
+          <section ref={introRef} className="w-[90%] xl:w-[70%] mt-16 md:mt-32 flex flex-col ">
               <div className="w-full md:w-3/4">
                 <h1 className="text-3xl md:text-6xl font-bold">
                   Impulsamos tu negocio con estrategias digitales diseñadas para generar resultados medibles.
@@ -146,7 +148,7 @@ export default function Home() {
               </div>
           </section>
 
-          <section className="w-[90%] md:w-[70%] mt-20 md:mt-32 flex flex-col">
+          <section className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h3 className="text-gray-600">Lo que nos diferencia</h3>
@@ -162,11 +164,10 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {console.log(services)}
                 {services.planes.map((plan, i) => (
                   <PlanCard
                     key={plan.id}
-                    ref={el => (servicesRef.current[i] = el)}
+                    ref={el => (planesRef.current[i] = el)}
                     subtitle={plan.subtitle}
                     title={plan.title}
                     description={plan.description}
@@ -175,7 +176,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="flex justify-between mb-5 flex-col md:flex-row">
+              <div className="flex justify-between mb-5 mt-20 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h2
                     className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
@@ -192,7 +193,7 @@ export default function Home() {
                 {services.individuales.map((service, i) => (
                   <ServiceCard
                     key={i}
-                    ref={el => (servicesRef.current[i] = el)}
+                    ref={el => (individualesRef.current[i] = el)}
                     title={service.title}
                     description={service.description}
                     items={service.items}
@@ -202,7 +203,7 @@ export default function Home() {
           </section>
           
           {/* <section ref={addToRefs}></section> */}
-          <section id="about-us" className="w-[90%] md:w-[70%] mt-24 md:mt-32 mx-auto">
+          <section id="about-us" className="w-[90%] xl:w-[70%] mt-24 md:mt-32 mx-auto">
             <div className="flex flex-col justify-between mb-12 gap-6">
               <div ref={aboutUsHeadRef} className="w-full flex items-center flex-col">
                 <h3 className="tracking-wide text-gray-600">
@@ -219,7 +220,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {aboutUs.map((item, i) => (
                 <AboutUsCard
                   key={item.id}
@@ -236,18 +237,6 @@ export default function Home() {
                 Contáctenos
               </Button>
             </div>
-          </section>
-
-          {/* CARDS */}
-          <section className="w-[90%] md:w-[70%] mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[1, 2, 3, 4].map((_, i) => (
-              <div
-              key={i}
-              //ref={el => (cardsRef.current[i] = el)}
-              >
-              <Card />
-              </div>
-          ))}
           </section>
       </div>
       <Footer />
