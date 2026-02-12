@@ -14,10 +14,10 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 w-full h-16 bg-neutral-100 z-50 flex justify-center">
-      <div className="w-full max-w md:px-0 px-6 md:max-w-7xl flex items-center justify-between relative">
+      <div className="w-full max-w lg:px-0 px-6 md:max-w-5xl xl:max-w-7xl flex items-center justify-between relative">
         <div className="absolute"><img className="w-[40px]" src="/img/estudio-dm-icon.png" alt=""/></div>
         <button
-            className="ml-auto md:hidden flex flex-col gap-1"
+            className="ml-auto lg:hidden flex flex-col gap-1"
             onClick={() => setOpen(!open)}
         >
             <span
@@ -47,16 +47,16 @@ export default function Navbar() {
 
         <nav
             className={`
-            absolute md:static top-16 left-0 w-full
-            bg-neutral-100 md:bg-transparent
-            md:px-0 px-6 h-screen md:h-16
-            flex-col md:flex-row
+            absolute lg:static top-16 left-0 w-full
+            bg-neutral-100 lg:bg-transparent
+            lg:px-0 px-6 h-screen lg:h-16
+            flex-col lg:flex-row
             flex justify-between items-center
             transition-all
-            ${open ? "left-[0%] pointer-events-auto" : "left-[100%] pointer-events-none md:left-[0%] md:pointer-events-auto"}
+            ${open ? "left-[0%] pointer-events-auto" : "left-[100%] pointer-events-none lg:left-[0%] lg:pointer-events-auto"}
             `}
         >
-            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between md:flex-row md:justify-between md:w-6/12 md:py-0 ">
+            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between lg:flex-row lg:justify-between lg:w-6/12 lg:py-0 ">
                 {navigation.map((item, idx) => (
                     <li>
                         <a
