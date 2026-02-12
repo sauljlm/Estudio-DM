@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import PlanCard from "../components/PlanCard";
@@ -133,8 +132,7 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
-      <div className="p-6 w-full flex flex-col items-center flex bg-neutral-100">
+      <div className="p-6 w-full flex flex-col items-center bg-neutral-100">
           {/* INTRO */}
           <section ref={introRef} className="w-[90%] xl:w-[70%] mt-16 md:mt-32 flex flex-col ">
               <div className="w-full md:w-3/4">
@@ -148,7 +146,7 @@ export default function Home() {
               </div>
           </section>
 
-          <section className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+          <section id="our-services" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h3 className="text-gray-600">Lo que nos diferencia</h3>

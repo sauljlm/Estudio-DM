@@ -7,7 +7,7 @@ const ServiceCard = forwardRef(({ subtitle, title, description, items }, ref) =>
   return (
     <article ref={ref} className="group h-full" >
       <div className="rounded-2xl bg-white h-full shadow-lg p-6 md:p-8 flex flex-col transition-all will-change-transform duration-300 hover:-translate-y-3 hover:shadow-xl">
-        <h3 className="text-2xl md:text-3xl pb-4">{title}</h3>
+        <h3 className="text-2xl pb-4">{title}</h3>
         <p className="pb-5">{description}</p>
 
         <ul className="pb-5">
@@ -22,12 +22,12 @@ const ServiceCard = forwardRef(({ subtitle, title, description, items }, ref) =>
           variant="secondary"
           className="
             mt-auto
-            md:opacity-0
+            md:hidden
             md:translate-y-2
             pointer-events-none
             transition-all
             duration-300
-            group-hover:opacity-100
+            group-hover:block
             group-hover:translate-y-0
             group-hover:pointer-events-auto
           "
