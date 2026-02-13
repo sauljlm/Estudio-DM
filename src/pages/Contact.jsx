@@ -1,9 +1,164 @@
-import { useEffect, useRef } from "react";
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 
 export default function Contact() {
     const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
+
+    const [userData, setUserData] = useState({
+        name: "",
+        email: "",
+        number: "",
+        message: ""
+    })
+    const [errors, setErrors] = useState({});
+
+    const addError = (formErrors) => {
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            ...formErrors,
+        }));
+    }
+
+    const validateName = (name) => {
+        let formErrors = {};
+        const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s']{1,50}$/;
+
+        if (!regex.test(name)) {
+            formErrors.name = 'Nombre invalido';
+        }
+        if (!name.trim()) {
+            formErrors.name = 'Nombre no puede estar vacío';
+        }
+        if (Object.keys(formErrors).length === 0) {
+            formErrors.name = '';
+        }
+        
+        addError(formErrors);
+        return formErrors;
+    };
+
+    const validateNumber = (number) => {
+        let formErrors = {};
+        const regex = /^(\+506\s?)?\d{4}[-\s]?\d{4}$/;
+
+        if (!regex.test(number)) {
+            formErrors.number = 'Numero telefónico invalido';
+        }
+        if (Object.keys(formErrors).length === 0) {
+            formErrors.number = '';
+        }
+        
+        addError(formErrors);
+        return formErrors;
+    };
+
+    const validateEmail = async (email) => {
+        let formErrors = {};
+        const regex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+        if (!regex.test(email)) {
+            formErrors.email = 'Correo electrónico inválido';
+        }
+        if (!email.trim()) {
+            formErrors.email = 'El correo electrónico no puede estar vacío.';
+        }
+        if (Object.keys(formErrors).length === 0) {
+            formErrors.email = '';
+        }
+
+        addError(formErrors);
+        return formErrors;
+    };
+
+    const validateMessage = (message) => {
+        let formErrors = {};
+
+        if (!message.trim()) {
+            formErrors.message = 'Mensaje no puede estar vacío';
+        }
+        if (Object.keys(formErrors).length === 0) {
+            formErrors.message = '';
+        }
+        
+        addError(formErrors);
+        return formErrors;
+    };
+
+    const validateForm = async () => {
+        let accumulatedErrors = {};
+    
+        const validations = [
+            await validateName(userData.name),
+            await validateNumber(userData.number),
+            await validateEmail(userData.email),
+            await validateMessage(userData.message),
+        ];
+    
+        validations.forEach(errorObj => {
+            Object.entries(errorObj).forEach(([key, value]) => {
+                if (value) {
+                    accumulatedErrors[key] = value;
+                }
+            });
+        });
+    
+        return Object.keys(accumulatedErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        setUserData({
+            ...userData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const saveData = async () => {
+        const formData = new FormData();
+    
+        Object.keys(userData).forEach(key => {
+            formData.append(key, userData[key]);
+        });
+    
+        formData.append("_captcha", "false");
+    
+        try {
+            const response = await fetch(
+                "https://formsubmit.co/saulsjlmclash@gmail.com",
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        Accept: "application/json"
+                    }
+                }
+            );
+    
+            const result = await response.json();
+    
+            if (result.success === "true" || response.ok) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'El mensaje se envió con éxito'
+                });
+    
+                setUserData({
+                    name: "",
+                    email: "",
+                    number: "",
+                    message: ""
+                });
+            }
+    
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la conexión'
+            });
+        }
+    };
 
     return (
         <>
@@ -50,32 +205,39 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <form action="https://formsubmit.co/info@estudiodmcr.onmicrosoft.com" method="POST" className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
+                    <form className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-900" htmlFor="name">Nombre</label>
-
-                            <input className="mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none" id="name" name="name" type="text" placeholder="Tu nombre" required />
+                            <input className={`${errors.name ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="name" name="name" type="text" placeholder="Tu nombre"  onChange={handleChange} />
+                            <div>{errors.name ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.name}</div> : " "}</div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-900" htmlFor="phone-number">Número telefónico</label>
-
-                            <input className="mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none" id="phone-number" name="phone-number" type="number" placeholder="Tu número telefónico" required />
+                            <label className="block text-sm font-medium text-gray-900" htmlFor="number">Número telefónico</label>
+                            <input className={`${errors.number ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="number" name="number" type="tel" inputMode="numeric" placeholder="Tu número telefónico" onChange={handleChange} />
+                            <div>{errors.number ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.number}</div> : " "}</div>
                         </div>
 
                         <div>
                             <label className="block text-sm font-medium text-gray-900" htmlFor="email">Email</label>
-
-                            <input className="mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none" id="email" name="email" type="email" placeholder="Tu email" required />
+                            <input className={`${errors.email ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="email" name="email" type="email" placeholder="Tu email" onChange={handleChange} />
+                            <div>{errors.email ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.email}</div> : " "}</div>
                         </div>
 
                         <div>
                             <label className="block text-sm font-medium text-gray-900" htmlFor="message">Mensaje</label>
-
-                            <textarea className="mt-1 w-full p-4 resize-none rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none" id="message" name="message" rows="4" placeholder="Tu mensaje" required></textarea>
+                            <textarea className={`${errors.message ? 'form__item--error' : ''} mt-1 w-full p-4 resize-none rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none`} id="message" name="message" rows="4" placeholder="Tu mensaje" onChange={handleChange} required></textarea>
+                            <div>{errors.message ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.message}</div> : " "}</div>
                         </div>
 
-                        <button className="block w-full rounded-lg border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-indigo-600" type="submit">
+                        <button className="block w-full rounded-lg border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-indigo-600" type="submit"
+                            onClick={async () => {
+                                const isValid = await validateForm();
+                                if (isValid) {
+                                    saveData();
+                                }
+                            }}
+                        >
                             Enviar mensaje
                         </button>
                     </form>
