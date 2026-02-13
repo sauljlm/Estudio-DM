@@ -126,7 +126,7 @@ export default function Contact() {
     
         try {
             const response = await fetch(
-                "https://formsubmit.co/saulsjlmclash@gmail.com",
+                "https://formsubmit.co/info@estudiodmcr.onmicrosoft.com",
                 {
                     method: "POST",
                     body: formData,
