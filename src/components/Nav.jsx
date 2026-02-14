@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { HashLink } from "react-router-hash-link";
 import Button from "./Button";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
 
   const navigation = [
     { title: "Portafolio", path: "/#portfolio" },
@@ -56,21 +58,27 @@ export default function Navbar() {
             ${open ? "left-[0%] pointer-events-auto" : "left-[100%] pointer-events-none lg:left-[0%] lg:pointer-events-auto"}
             `}
         >
-            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between lg:flex-row lg:justify-between lg:w-6/12 lg:py-0 ">
-                {navigation.map((item, idx) => (
-                    <li>
-                        <a
-                            key={idx}
-                            href={item.path}
-                            className="border-b-4 border-transparent hover:border-black transition text-xl md:text-base"
-                            onClick={() => setOpen(false)}
-                        >
-                            {item.title}
-                        </a>
-                    </li>
-                ))}
+            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between lg:flex-row lg:justify-between lg:w-6/12 lg:py-0">
+            {navigation.map((item, idx) => (
+                <li key={idx}>
+                <HashLink
+                to={item.path}
+                    scroll={(el) => {
+                        const yOffset = -90; // altura navbar
+                        const y =
+                        el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+                        window.scrollTo({ top: y, behavior: "smooth" });
+                    }}
+                    onClick={() => setOpen(false)}
+                    className="border-b-4 border-transparent hover:border-black transition text-xl md:text-base"
+                    >
+                    {item.title}
+                </HashLink>
+                </li>
+            ))}
             </ul>
-            <Button variant="primary" className="right-0 md:absolute">Contáctenos</Button>
+            <Button variant="primary" className="right-0 md:absolute" href={contactUrl} target="_blank" aria-label="Contactar por whatsApp">Contáctenos</Button>
         </nav>
       </div>
 

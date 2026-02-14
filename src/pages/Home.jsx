@@ -20,6 +20,8 @@ export default function Home() {
   const individualesRef = useRef([]);
   const aboutRef = useRef([]);
 
+  const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
+
   planesRef.current = [];
   individualesRef.current = [];
   aboutRef.current = [];
@@ -231,7 +233,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center mt-14">
-              <Button variant="secondary">
+              <Button variant="secondary" href={contactUrl} target="_blank" aria-label="Contactar por whatsApp">
                 Contáctenos
               </Button>
             </div>
