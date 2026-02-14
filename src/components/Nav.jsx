@@ -10,7 +10,7 @@ export default function Navbar() {
     { title: "Portafolio", path: "/#portfolio" },
     { title: "Nuestros Servicios", path: "/#our-services" },
     { title: "Sobre Nosotros", path: "/#about-us" },
-    { title: "Q&A", path: "/#q-y-a" },
+    { title: "Preguntas frecuentes", path: "/#FAQs" },
     { title: "Contacto", path: "/contact-us" }
   ];
 
@@ -58,13 +58,13 @@ export default function Navbar() {
             ${open ? "left-[0%] pointer-events-auto" : "left-[100%] pointer-events-none lg:left-[0%] lg:pointer-events-auto"}
             `}
         >
-            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between lg:flex-row lg:justify-between lg:w-6/12 lg:py-0">
+            <ul className="w-full flex ml-auto mr-auto flex-col items-center py-10 h-1/2 justify-between lg:flex-row lg:justify-between lg:w-8/12 xl:w-6/12 lg:py-0">
             {navigation.map((item, idx) => (
                 <li key={idx}>
                 <HashLink
                 to={item.path}
                     scroll={(el) => {
-                        const yOffset = -90; // altura navbar
+                        const yOffset = -90;
                         const y =
                         el.getBoundingClientRect().top + window.pageYOffset + yOffset;
 

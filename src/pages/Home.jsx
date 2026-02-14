@@ -5,6 +5,7 @@ import PlanCard from "../components/PlanCard";
 import ServiceCard from "../components/ServiceCard";
 import AboutUsCard from "../components/AboutUsCard";
 import AnimatedCard from "../components/animation/AnimatedCard"
+import FAQs from "../components/FAQs";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -237,6 +238,26 @@ export default function Home() {
                 Contáctenos
               </Button>
             </div>
+          </section>
+
+          <section id="FAQs" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+              <div className="flex justify-between mb-5 flex-col md:flex-row">
+                <div className="heading-anim">
+                  <h3 className="text-gray-600">Preguntas frecuentes</h3>
+                  <h2
+                    className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
+                  >
+                    Todo lo que necesitás saber <br/>para empezar
+                  </h2>
+                </div>
+                <p className="text-anim w-full md:w-[50%]">
+                Conocé nuestro proceso, metodología y alcance de los servicios para entender cómo podemos ayudarte a alcanzar tus objetivos digitales.
+                </p>
+              </div>
+
+              <div className="mb-12">
+                <FAQs />
+              </div>
           </section>
       </div>
       <Footer />
