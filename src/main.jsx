@@ -14,7 +14,7 @@ root.render(
         <Nav></Nav>
         <Routes>
         <Route exact path="" element={<Home></Home>} />
-        <Route exact path="/contact-us" element={<Contact></Contact>} />
+        <Route exact path="/contactanos" element={<Contact></Contact>} />
         </Routes>
     </BrowserRouter>
   );

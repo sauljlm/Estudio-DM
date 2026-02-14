@@ -5,6 +5,7 @@ import PlanCard from "../components/PlanCard";
 import ServiceCard from "../components/ServiceCard";
 import AboutUsCard from "../components/AboutUsCard";
 import AnimatedCard from "../components/animation/AnimatedCard"
+import FAQs from "../components/FAQs";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,6 +20,8 @@ export default function Home() {
   const planesRef = useRef([]);
   const individualesRef = useRef([]);
   const aboutRef = useRef([]);
+
+  const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
 
   planesRef.current = [];
   individualesRef.current = [];
@@ -146,7 +149,7 @@ export default function Home() {
               </div>
           </section>
 
-          <section id="our-services" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+          <section id="nuestros-servicios" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h3 className="text-gray-600">Lo que nos diferencia</h3>
@@ -201,7 +204,7 @@ export default function Home() {
           </section>
           
           {/* <section ref={addToRefs}></section> */}
-          <section id="about-us" className="w-[90%] xl:w-[70%] mt-24 md:mt-32 mx-auto">
+          <section id="sobre-nosotros" className="w-[90%] xl:w-[70%] mt-24 md:mt-32 mx-auto">
             <div className="flex flex-col justify-between mb-12 gap-6">
               <div ref={aboutUsHeadRef} className="w-full flex items-center flex-col">
                 <h3 className="tracking-wide text-gray-600">
@@ -231,10 +234,30 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center mt-14">
-              <Button variant="secondary">
+              <Button variant="secondary" href={contactUrl} target="_blank" aria-label="Contactar por whatsApp">
                 Contáctenos
               </Button>
             </div>
+          </section>
+
+          <section id="preguntas-frecuentes" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+              <div className="flex justify-between mb-5 flex-col md:flex-row">
+                <div className="heading-anim">
+                  <h3 className="text-gray-600">Preguntas frecuentes</h3>
+                  <h2
+                    className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
+                  >
+                    Todo lo que necesitás saber <br/>para empezar
+                  </h2>
+                </div>
+                <p className="text-anim w-full md:w-[50%]">
+                Conocé nuestro proceso, metodología y alcance de los servicios para entender cómo podemos ayudarte a alcanzar tus objetivos digitales.
+                </p>
+              </div>
+
+              <div className="mb-12">
+                <FAQs />
+              </div>
           </section>
       </div>
       <Footer />
