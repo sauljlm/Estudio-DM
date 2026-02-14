@@ -7,19 +7,19 @@ export default function Footer() {
                         <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">Información</h3>
                         <ul className="space-y-2">
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#portfolio">Portafolio</a>
+                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#portafolio">Portafolio</a>
                             </li>
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/about-us">Sobre Nosotros</a>
+                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#sobre-nosotros">Sobre Nosotros</a>
                             </li>
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#our-services">Nuestros Servicios</a>
+                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#nuestros-servicios">Nuestros Servicios</a>
                             </li>
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#q-y-a">Q&A</a>
+                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#preguntas-frecuentes">Preguntas frecuentes</a>
                             </li>
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#contact">Contacto</a>
+                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/contactanos">Contacto</a>
                             </li>
                         </ul>
                     </div>

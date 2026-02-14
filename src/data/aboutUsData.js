@@ -20,5 +20,5 @@ export const aboutUs = [
         "Medimos, optimizamos y escalamos con foco en resultados reales y sostenibles.",
       icon: "performance",
     },
-  ];
+];
   

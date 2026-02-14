@@ -7,11 +7,11 @@ export default function Navbar() {
   const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
 
   const navigation = [
-    { title: "Portafolio", path: "/#portfolio" },
-    { title: "Nuestros Servicios", path: "/#our-services" },
-    { title: "Sobre Nosotros", path: "/#about-us" },
-    { title: "Preguntas frecuentes", path: "/#FAQs" },
-    { title: "Contacto", path: "/contact-us" }
+    { title: "Portafolio", path: "/#portafolio" },
+    { title: "Nuestros Servicios", path: "/#nuestros-servicios" },
+    { title: "Sobre Nosotros", path: "/#sobre-nosotros" },
+    { title: "Preguntas frecuentes", path: "/#preguntas-frecuentes" },
+    { title: "Contacto", path: "/contactanos" }
   ];
 
   return (

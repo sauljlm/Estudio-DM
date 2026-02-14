@@ -149,7 +149,7 @@ export default function Home() {
               </div>
           </section>
 
-          <section id="our-services" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+          <section id="nuestros-servicios" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h3 className="text-gray-600">Lo que nos diferencia</h3>
@@ -204,7 +204,7 @@ export default function Home() {
           </section>
           
           {/* <section ref={addToRefs}></section> */}
-          <section id="about-us" className="w-[90%] xl:w-[70%] mt-24 md:mt-32 mx-auto">
+          <section id="sobre-nosotros" className="w-[90%] xl:w-[70%] mt-24 md:mt-32 mx-auto">
             <div className="flex flex-col justify-between mb-12 gap-6">
               <div ref={aboutUsHeadRef} className="w-full flex items-center flex-col">
                 <h3 className="tracking-wide text-gray-600">
@@ -240,7 +240,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="FAQs" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
+          <section id="preguntas-frecuentes" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
                   <h3 className="text-gray-600">Preguntas frecuentes</h3>
