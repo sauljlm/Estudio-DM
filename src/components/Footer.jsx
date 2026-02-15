@@ -1,47 +1,135 @@
+import { useLanguage } from "../i18n/LanguageContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+
 export default function Footer() {
+    const { lang, translation } = useLanguage();
+    const basePath = lang === "en" ? "/en" : "";
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const changeLanguage = (targetLang) => {
+        let newPath = location.pathname;
+      
+        if (targetLang === "en") {
+          if (!newPath.startsWith("/en")) {
+            newPath = "/en" + newPath;
+          }
+        } else {
+          newPath = newPath.replace(/^\/en/, "") || "/";
+        }
+      
+        navigate(newPath);
+      };
+
     return (
         <footer className="text-gray-700 pt-12" role="contentinfo">
             <div className="container mx-auto py-12 w-[90%] xl:w-[70%]">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div className="text-center md:text-left">
-                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">Información</h3>
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">
+                            {lang === "en" ? "Information" : "Información"}
+                        </h3>
+
+                        <ul className="space-y-2">
+
+                            <li>
+                                <HashLink
+                                    smooth
+                                    to={`${basePath}/#portafolio`}
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Portfolio" : "Portafolio"}
+                                </HashLink>
+                            </li>
+
+                            <li>
+                                <HashLink
+                                    smooth
+                                    to={`${basePath}/#sobre-nosotros`}
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "About us" : "Sobre nosotros"}
+                                </HashLink>
+                            </li>
+
+                            <li>
+                                <HashLink
+                                    smooth
+                                    to={`${basePath}/#nuestros-servicios`}
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Services" : "Servicios"}
+                                </HashLink>
+                            </li>
+
+                            <li>
+                                <HashLink
+                                    smooth
+                                    to={`${basePath}/#preguntas-frecuentes`}
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Frequently asked questions" : "Preguntas frecuentes"}
+                                </HashLink>
+                            </li>
+
+                            <li>
+                                <HashLink
+                                    smooth
+                                    to={`${basePath}/contact`}
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Contact" : "Contacto"}
+                                </HashLink>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div className="text-center md:text-left">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">
+                            {lang === "en" ? "Contact" : "Contacto"}
+                        </h3>
                         <ul className="space-y-2">
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#portafolio">Portafolio</a>
+                                <a
+                                    href="mailto:info@estudiodmcr.onmicrosoft.com"
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Email" : "Correo"}: info@estudiodmcr.onmicrosoft.com
+                                </a>
                             </li>
                             <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#sobre-nosotros">Sobre Nosotros</a>
-                            </li>
-                            <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#nuestros-servicios">Nuestros Servicios</a>
-                            </li>
-                            <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/#preguntas-frecuentes">Preguntas frecuentes</a>
-                            </li>
-                            <li>
-                                <a className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors" href="/contactanos">Contacto</a>
+                                <a
+                                    href="tel:+50683649226"
+                                    className="footer-link"
+                                >
+                                    {lang === "en" ? "Phone" : "Teléfono"}: +506 8364 9226
+                                </a>
                             </li>
                         </ul>
                     </div>
                     <div className="text-center md:text-left">
-                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">Contáctanos</h3>
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">
+                            {lang === "en" ? "Language" : "Idioma"}
+                        </h3>
+
                         <ul className="space-y-2">
                             <li>
-                                <a href="mailto:info@estudiodmcr.onmicrosoft.com" className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">Correo: info@estudiodmcr.onmicrosoft.com</a>
+                                <button
+                                    onClick={() => changeLanguage("es")}
+                                    className="footer-link"
+                                >
+                                    Español
+                                </button>
                             </li>
+
                             <li>
-                                <a href="tel:+50683649226" className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">Teléfono: +506 8364 9226</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="text-center md:text-left">
-                        <h3 className="text-lg md:text-xl lg:text-2xl font-medium mb-2 text-[#212121]">Idioma</h3>
-                        <ul className="space-y-2">
-                            <li>
-                                <button className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">Español</button>
-                            </li>
-                            <li>
-                                <button className="text-md md:text-lg lg:text-xl text-[#5B5B5B] hover:text-[#212121] transition-colors">English</button>
+                                <button
+                                    onClick={() => changeLanguage("en")}
+                                    className="footer-link"
+                                >
+                                    English
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -59,7 +147,7 @@ export default function Footer() {
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="w-5 h-5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"></path></svg>
                         </a>
                     </div>
-                    <p className="text-sm md:text-base text-[#696A78] font-medium">© 2026 Estudio-DM. Todos los derechos reservados.</p>
+                    <p className="text-sm md:text-base text-[#696A78] font-medium">{lang === "en" ? "© 2026 Estudio-DM. All rights reserved" : "© 2026 Estudio-DM. Todos los derechos reservados."}</p>
                 </div>
             </div>
         </footer>

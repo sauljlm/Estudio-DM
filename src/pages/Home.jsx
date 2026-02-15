@@ -1,4 +1,9 @@
 import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import { useLanguage } from "../i18n/LanguageContext";
+
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 import PlanCard from "../components/PlanCard";
@@ -7,9 +12,6 @@ import AboutUsCard from "../components/AboutUsCard";
 import AnimatedCard from "../components/animation/AnimatedCard"
 import FAQs from "../components/FAQs";
 
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import { services } from "../data/servicesData";
 import { aboutUs } from "../data/aboutUsData";
 
@@ -21,7 +23,9 @@ export default function Home() {
   const individualesRef = useRef([]);
   const aboutRef = useRef([]);
 
-  const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
+  const { lang, translation } = useLanguage();
+
+  const contactUrl = `https://wa.me/50683649226?text=Hola,%20me%20gustaría%20saber%20más%20información`;
 
   planesRef.current = [];
   individualesRef.current = [];
@@ -29,6 +33,7 @@ export default function Home() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
+    if (!introRef.current) return;
 
     // Intro
     const introSplit = new SplitText(introRef.current, {
@@ -122,10 +127,10 @@ export default function Home() {
     });
 
     return () => {
-      split.revert();
+      //split.revert();
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, []);
+  }, [location.pathname]);
   
   const addToRefs = el => {
     if (el && !cardsRef.current.includes(el)) {
@@ -136,13 +141,12 @@ export default function Home() {
   return (
     <>
       <div className="p-6 w-full flex flex-col items-center bg-neutral-100">
-          {/* INTRO */}
           <section ref={introRef} className="w-[90%] xl:w-[70%] mt-16 md:mt-32 flex flex-col ">
               <div className="w-full md:w-3/4">
                 <h1 className="text-3xl md:text-6xl font-bold">
-                  Impulsamos tu negocio con estrategias digitales diseñadas para generar resultados medibles.
+                  {translation.banner.title}
                 </h1>
-                <h2 className="mt-4 text-l md:text-2xl text-gray-600">Analizamos tu negocio, diseñamos una estrategia a tu medida y la ejecutamos contigo, con campañas, contenido y seguimiento basado en resultados reales con metricas claras.</h2>
+                <h2 className="mt-4 text-l md:text-2xl text-gray-600">{translation.banner.subtitle}</h2>
               </div>
               <div ref={bannerRef} className="w-full flex md:justify-center">
                 <AnimatedCard/>

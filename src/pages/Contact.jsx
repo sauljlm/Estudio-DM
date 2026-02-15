@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom";
+import { useLanguage } from "../i18n/LanguageContext";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 
 export default function Contact() {
-    const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
+    const { lang, translation } = useLanguage();
+    const contactUrl = translation.navbar.whatsappMsg;
 
     const [userData, setUserData] = useState({
         name: "",
@@ -27,10 +28,10 @@ export default function Contact() {
         const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s']{1,50}$/;
 
         if (!regex.test(name)) {
-            formErrors.name = 'Nombre invalido';
+            formErrors.name = lang === "en" ? "Invalid name" : "Nombre invalido";
         }
         if (!name.trim()) {
-            formErrors.name = 'Nombre no puede estar vacío';
+            formErrors.name = lang === "en" ? "Name can't be empty" : "Nombre no puede estar vacío";
         }
         if (Object.keys(formErrors).length === 0) {
             formErrors.name = '';
@@ -45,7 +46,7 @@ export default function Contact() {
         const regex = /^(\+506\s?)?\d{4}[-\s]?\d{4}$/;
 
         if (!regex.test(number)) {
-            formErrors.number = 'Numero telefónico invalido';
+            formErrors.number = lang === "en" ? "Invalid phone number" : "Numero telefónico invalido";
         }
         if (Object.keys(formErrors).length === 0) {
             formErrors.number = '';
@@ -60,10 +61,10 @@ export default function Contact() {
         const regex = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
 
         if (!regex.test(email)) {
-            formErrors.email = 'Correo electrónico inválido';
+            formErrors.email = lang === "en" ? "Invalid email" :  "Correo electrónico inválido";
         }
         if (!email.trim()) {
-            formErrors.email = 'El correo electrónico no puede estar vacío.';
+            formErrors.email = lang === "en" ? "Email can't be empty" : "El correo electrónico no puede estar vacío.";
         }
         if (Object.keys(formErrors).length === 0) {
             formErrors.email = '';
@@ -77,7 +78,7 @@ export default function Contact() {
         let formErrors = {};
 
         if (!message.trim()) {
-            formErrors.message = 'Mensaje no puede estar vacío';
+            formErrors.message = lang === "en" ? "Message can't be empty" : "Mensaje no puede estar vacío";
         }
         if (Object.keys(formErrors).length === 0) {
             formErrors.message = '';
@@ -166,16 +167,16 @@ export default function Contact() {
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                     <div className="md:py-4 h-3/4 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">Contáctanos</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">{lang === "en" ? "Contact us" : "Contáctanos"}</h2>
 
                             <p className="mt-4 text-pretty text-gray-700">
-                            Queremos conocer tu proyecto, entender qué necesitás y ver cómo podemos ayudarte a crecer con una estrategia digital que realmente funcione.
+                            {lang === "en" ? "We want to learn about your project, understand your needs and see how we can help you grow with a digital strategy that truly works." : "Queremos conocer tu proyecto, entender qué necesitás y ver cómo podemos ayudarte a crecer con una estrategia digital que realmente funcione."}
                             </p>
                         </div>
 
                         <dl className="mb-6 space-y-3">
                             <div>
-                                <dt className="sr-only">Phone number</dt>
+                                <dt className="sr-only">{lang === "en" ? "Phone number" : "Número telefónico"}</dt>
 
                                 <dd className="grid grid-cols-[24px_1fr] items-center gap-2 text-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
@@ -187,7 +188,7 @@ export default function Contact() {
                             </div>
 
                             <div>
-                                <dt className="sr-only">Email</dt>
+                                <dt className="sr-only">{lang === "en" ? "Email" : "Correo electrónico"}</dt>
 
                                 <dd className="grid grid-cols-[24px_1fr] items-center gap-2 text-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-5">
@@ -207,26 +208,26 @@ export default function Contact() {
 
                     <form className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
                         <div>
-                            <label className="block text-sm font-medium text-gray-900" htmlFor="name">Nombre</label>
-                            <input className={`${errors.name ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="name" name="name" type="text" placeholder="Tu nombre"  onChange={handleChange} />
+                            <label className="block text-sm font-medium text-gray-900" htmlFor="name">{lang === "en" ? "Name" : "Nombre"}</label>
+                            <input className={`${errors.name ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="name" name="name" type="text" placeholder={lang === "en" ? "Your name" : "Tú nombre"}  onChange={handleChange} />
                             <div>{errors.name ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.name}</div> : " "}</div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-900" htmlFor="number">Número telefónico</label>
-                            <input className={`${errors.number ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="number" name="number" type="tel" inputMode="numeric" placeholder="Tu número telefónico" onChange={handleChange} />
+                            <label className="block text-sm font-medium text-gray-900" htmlFor="number">{lang === "en" ? "Your phone number" : "Tu número telefónico"}</label>
+                            <input className={`${errors.number ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="number" name="number" type="tel" inputMode="numeric" placeholder={lang === "en" ? "Your phone number" : "Tu número telefónico"} onChange={handleChange} />
                             <div>{errors.number ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.number}</div> : " "}</div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-900" htmlFor="email">Email</label>
-                            <input className={`${errors.email ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="email" name="email" type="email" placeholder="Tu email" onChange={handleChange} />
+                            <label className="block text-sm font-medium text-gray-900" htmlFor="email">{lang === "en" ? "Email" : "Correo electrónico"}</label>
+                            <input className={`${errors.email ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="email" name="email" type="email" placeholder={lang === "en" ? "Your email" : "Tú correo electrónico"} onChange={handleChange} />
                             <div>{errors.email ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.email}</div> : " "}</div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-900" htmlFor="message">Mensaje</label>
-                            <textarea className={`${errors.message ? 'form__item--error' : ''} mt-1 w-full p-4 resize-none rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none`} id="message" name="message" rows="4" placeholder="Tu mensaje" onChange={handleChange} required></textarea>
+                            <label className="block text-sm font-medium text-gray-900" htmlFor="message">{lang === "en" ? "Message" : "Mensaje"}</label>
+                            <textarea className={`${errors.message ? 'form__item--error' : ''} mt-1 w-full p-4 resize-none rounded-lg border-gray-300 focus:border-indigo-500 focus:outline-none`} id="message" name="message" rows="4" placeholder={lang === "en" ? "Your Message" : "Tú mensaje"} onChange={handleChange} required></textarea>
                             <div>{errors.message ? <div className="block mb-[-1rem] text-red-800 text-xs">{errors.message}</div> : " "}</div>
                         </div>
 
@@ -238,7 +239,7 @@ export default function Contact() {
                                 }
                             }}
                         >
-                            Enviar mensaje
+                            {lang === "en" ? "Send message" : "Enviar mensaje"}
                         </button>
                     </form>
                 </div>
