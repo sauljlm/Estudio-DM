@@ -105,17 +105,17 @@ export default function Navbar() {
             <div className="right-0 md:absolute flex gap-2">
               <button 
                 onClick={toggleLang}
-                class="flex items-center gap-2 text-black/50 font-medium hover:bg-[#E3E3E3] px-3 py-2 rounded-md transition-all duration-500 ease-in-out" 
+                className="flex items-center gap-2 text-black/50 font-medium hover:bg-[#E3E3E3] px-3 py-2 rounded-md transition-all duration-500 ease-in-out" 
                 aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe w-5 h-5">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-globe w-5 h-5">
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                     <path d="M2 12h20"></path>
                   </svg>
-                <span class="text-lg">{lang === "es" ? "EN" : "ES"}</span>
+                <span className="text-lg">{lang === "es" ? "EN" : "ES"}</span>
               </button>
               <Button variant="primary">
-                <a href={contactUrl} target="_blank" aria-label="Contactar por whatsApp">{lang === "en" ? "Contact us" : "Contáctanos"}</a>
+                <a href={contactUrl} target="_blank" aria-label={lang === "en" ? "Contact us via WhatsApp" : "Contactar por WhatsApp"}>{lang === "en" ? "Contact us" : "Contáctanos"}</a>
               </Button>
             </div>
         </nav>
