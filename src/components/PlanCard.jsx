@@ -1,8 +1,15 @@
 import { forwardRef } from "react";
+import { useLanguage } from "../i18n/LanguageContext";
 import Button from "./Button";
 
 const PlanCard = forwardRef(({ subtitle, title, description, items }, ref) => {
-  const contactUrl = `https://wa.me/50683649226?text=Hola,%20me%20gustaría%20saber%20más%20información%20del%20${title}`;
+  const { lang } = useLanguage();
+  const message =
+  lang === "en"
+    ? `Hi, I would like to get more information about ${title}`
+    : `Hola, me gustaría saber más información sobre ${title}`;
+
+  const contactUrl = `https://wa.me/50683649226?text=${encodeURIComponent(message)}`;
 
   return (
     <article ref={ref} className="group h-full" >
@@ -33,7 +40,7 @@ const PlanCard = forwardRef(({ subtitle, title, description, items }, ref) => {
             group-hover:pointer-events-auto
           "
         >
-          <a href={contactUrl} target="_blank" aria-label="Más información del plan">Más información</a>
+          <a href={contactUrl} target="_blank" aria-label={lang === "en" ? "More information about the plan" : "Más información del plan"}>{lang === "en" ? "More information" : "Más información"}</a>
         </Button>
       </div>
     </article>

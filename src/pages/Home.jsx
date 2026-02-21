@@ -19,13 +19,12 @@ export default function Home() {
   const subtitleSplitRef = useRef(null);  
   const bannerRef = useRef(null);
   const aboutUsHeadRef = useRef(null);
+  const faqsRef = useRef(null);
   const planesRef = useRef([]);
   const individualesRef = useRef([]);
   const aboutRef = useRef([]);
 
   const { lang, translation } = useLanguage();
-
-  const contactUrl = `https://wa.me/50683649226?text=Hola,%20me%20gustaría%20saber%20más%20información`;
 
   planesRef.current = [];
   individualesRef.current = [];
@@ -129,6 +128,17 @@ export default function Home() {
       ease: "power2.out",
       scrollTrigger: {
         trigger: aboutUsHeadRef.current,
+        start: "top 85%",
+      }
+    });
+
+    gsap.from(faqsRef.current, {
+      y: 50,
+      autoAlpha: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: faqsRef.current,
         start: "top 85%",
       }
     });
@@ -245,19 +255,19 @@ export default function Home() {
           <section id="preguntas-frecuentes" className="w-[90%] xl:w-[70%] mt-20 md:mt-32 flex flex-col">
               <div className="flex justify-between mb-5 flex-col md:flex-row">
                 <div className="heading-anim">
-                  <h3 className="text-gray-600">Preguntas frecuentes</h3>
+                  <h3 className="text-gray-600">{lang === "en" ? "Frequently asked questions" : "Preguntas frecuentes"}</h3>
                   <h2
-                    className="text-2xl md:text-3xl font-bold mb-4 md:mb-8"
+                    className="text-2xl w-3/4 md:text-3xl font-bold mb-4 md:mb-8"
                   >
-                    Todo lo que necesitás saber <br/>para empezar
+                    {lang === "en" ? `Everything you need to know to get started` : `Todo lo que necesitas saber para empezar`}
                   </h2>
                 </div>
                 <p className="text-anim w-full md:w-[50%]">
-                Conocé nuestro proceso, metodología y alcance de los servicios para entender cómo podemos ayudarte a alcanzar tus objetivos digitales.
+                {translation.FAQs.description}
                 </p>
               </div>
 
-              <div className="mb-12">
+              <div ref={faqsRef} className="mb-12">
                 <FAQs />
               </div>
           </section>

@@ -177,6 +177,71 @@ export const translations = {
                     icon: "performance",
                 },
             ]
+        },
+        FAQs : {
+            description: "Conocé nuestro proceso, metodología y alcance de los servicios para entender cómo podemos ayudarte a alcanzar tus objetivos digitales.",
+            items: [
+                {
+                    title: "¿Cómo puedo empezar a trabajar con ustedes?",
+                    content:
+                      "Podés contactarnos mediante el formulario, WhatsApp o correo. Coordinamos una reunión inicial para conocer tu proyecto y proponerte una estrategia personalizada."
+                },
+                {
+                    title: "¿Trabajan con negocios de cualquier tamaño?",
+                    content:
+                        "Sí. Trabajamos con emprendimientos, pymes y marcas consolidadas, adaptando las estrategias según cada etapa del negocio."
+                },
+                {
+                    title: "¿Qué incluye cada plan de servicio?",
+                    content:
+                        "Cada plan incluye una combinación de estrategia, creación de contenido, gestión publicitaria y análisis de resultados. La diferencia principal está en el nivel de profundidad, personalización y optimización que recibe tu marca."
+                },
+                {
+                    title: "¿Cuál plan es el más recomendado para mi negocio?",
+                    content:
+                        "Depende de tus objetivos, presupuesto y etapa digital. Analizamos tu caso para recomendarte la opción que mejor se adapte a tu crecimiento y necesidades."
+                },
+                {
+                    title: "¿Puedo contratar servicios individuales sin elegir un plan completo?",
+                    content:
+                        "Sí. Ofrecemos servicios específicos como gestión de redes sociales, publicidad digital, desarrollo web, branding o estrategia, según lo que tu negocio necesite."
+                },
+                {
+                    title: "¿Cuánto tiempo tarda en verse resultados?",
+                    content:
+                        "Los resultados pueden variar según el servicio, el mercado y los objetivos. Normalmente se empiezan a ver mejoras en visibilidad y rendimiento durante los primeros meses de trabajo continuo."
+                },    
+                {
+                    title: "¿Ustedes crean el contenido o debo proporcionarlo?",
+                    content:
+                        "Nos encargamos de la producción de contenido visual, creativo y estratégico. También podemos trabajar con material que tu marca ya tenga."
+                },    
+                {
+                    title: "¿En qué plataformas trabajan la publicidad digital?",
+                    content:
+                        "Trabajamos principalmente con plataformas como Meta Ads (Facebook e Instagram) y Google Ads, seleccionando las más efectivas según el público objetivo."
+                },    
+                {
+                    title: "¿Puedo cambiar de plan en el futuro?",
+                    content:
+                        "Sí. Los planes están pensados para crecer junto con tu negocio, por lo que pueden ajustarse según tus necesidades y resultados."
+                },    
+                {
+                    title: "¿El desarrollo web incluye optimización?",
+                    content:
+                        "Sí. Diseñamos páginas enfocadas en atraer clientes potenciales, mejorar la experiencia del usuario y facilitar el contacto o compra."
+                },
+                {
+                    title: "¿Recibiré reportes o métricas del rendimiento?",
+                    content:
+                        "Sí. Entregamos reportes periódicos con análisis de resultados, métricas clave y recomendaciones para mejorar la estrategia."
+                },
+                {
+                    title: "¿También ayudan con la identidad visual o branding?",
+                    content:
+                        "Sí. Podemos desarrollar desde logotipo y lineamientos visuales hasta mensajes estratégicos que fortalezcan la personalidad de tu marca."
+                },
+            ]
         }
     },
 
@@ -357,6 +422,71 @@ export const translations = {
                       "We measure, optimize, and scale with a focus on real and sustainable results.",
                     icon: "performance",
                   },
+            ]
+        },
+        FAQs : {
+            description: "Get to know our process, methodology, and service scope to understand how we can help you achieve your digital goals.",
+            items: [
+                {
+                    title: "How can I start working with you?",
+                    content:
+                      "You can contact us through the form, WhatsApp, or email. We’ll schedule an initial meeting to understand your project and propose a personalized strategy."
+                  },
+                  {
+                    title: "Do you work with businesses of any size?",
+                    content:
+                      "Yes. We work with startups, small and medium-sized businesses, and established brands, adapting strategies to each stage of growth."
+                  },
+                  {
+                    title: "What does each service plan include?",
+                    content:
+                      "Each plan includes a combination of strategy, content creation, advertising management, and performance analysis. The main difference lies in the level of depth, personalization, and optimization your brand receives."
+                  },
+                  {
+                    title: "Which plan is best for my business?",
+                    content:
+                      "It depends on your goals, budget, and digital stage. We analyze your case to recommend the option that best fits your growth and needs."
+                  },
+                  {
+                    title: "Can I hire individual services without choosing a full plan?",
+                    content:
+                      "Yes. We offer specific services such as social media management, digital advertising, web development, branding, or strategy, depending on what your business needs."
+                  },
+                  {
+                    title: "How long does it take to see results?",
+                    content:
+                      "Results may vary depending on the service, market, and objectives. Improvements in visibility and performance are usually noticeable within the first few months of consistent work."
+                  },
+                  {
+                    title: "Do you create the content, or do I need to provide it?",
+                    content:
+                      "We handle the production of visual, creative, and strategic content. We can also work with materials your brand already has."
+                  },
+                  {
+                    title: "Which platforms do you use for digital advertising?",
+                    content:
+                      "We primarily work with platforms such as Meta Ads (Facebook and Instagram) and Google Ads, selecting the most effective ones based on your target audience."
+                  },
+                  {
+                    title: "Can I change plans in the future?",
+                    content:
+                      "Yes. Our plans are designed to grow alongside your business and can be adjusted according to your needs and results."
+                  },
+                  {
+                    title: "Does web development include optimization?",
+                    content:
+                      "Yes. We design websites focused on attracting potential clients, improving user experience, and facilitating contact or purchases."
+                  },
+                  {
+                    title: "Will I receive performance reports or metrics?",
+                    content:
+                      "Yes. We provide periodic reports with performance analysis, key metrics, and strategic recommendations to improve results."
+                  },
+                  {
+                    title: "Do you also help with visual identity or branding?",
+                    content:
+                      "Yes. We can develop everything from logo design and visual guidelines to strategic messaging that strengthens your brand’s personality."
+                  }
             ]
         }
     }
