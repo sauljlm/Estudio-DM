@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Nav from "./components/Nav";
 import "./tailwind.css";
 
@@ -11,10 +12,14 @@ const root = ReactDOM.createRoot(document.getElementById('app'));
 
 root.render(
     <BrowserRouter>
-        <Nav></Nav>
+      <LanguageProvider>
+        <Nav />
         <Routes>
-        <Route exact path="" element={<Home></Home>} />
-        <Route exact path="/contactanos" element={<Contact></Contact>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/en" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/en/contact" element={<Contact />} />
         </Routes>
+      </LanguageProvider>
     </BrowserRouter>
-  );
+);

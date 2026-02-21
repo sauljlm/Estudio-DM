@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { FAQsData } from "../data/FAQsData";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function FAQs() {
   const [activeIndex, setActiveIndex] = useState(null);
+  const { translation } = useLanguage();
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -10,7 +11,7 @@ export default function FAQs() {
 
   return (
     <div className="accordion max-w-3xl mx-auto">
-      {FAQsData.map((item, index) => (
+      {translation.FAQs.items.map((item, index) => (
         <div key={index} className="accordion-item border-b border-gray-200">
           
           <button

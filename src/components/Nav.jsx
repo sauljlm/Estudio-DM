@@ -1,23 +1,47 @@
 import { useState } from "react";
 import { HashLink } from "react-router-hash-link";
+import { useLanguage } from "../i18n/LanguageContext";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "./Button";
 
 export default function Navbar() {
+  const { lang, translation } = useLanguage();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
-  const contactUrl = `https://wa.me/50683649226?text=Hola%2C%20me%20gustaría%20saber%20más%20información`;
+  const basePath = lang === "en" ? "/en" : "/";
 
-  const navigation = [
-    { title: "Portafolio", path: "/#portafolio" },
-    { title: "Nuestros Servicios", path: "/#nuestros-servicios" },
-    { title: "Sobre Nosotros", path: "/#sobre-nosotros" },
-    { title: "Preguntas frecuentes", path: "/#preguntas-frecuentes" },
-    { title: "Contacto", path: "/contactanos" }
-  ];
+  const contactUrl = translation.navbar.whatsappMsg;
+
+  const navigation =
+    lang === "en"
+      ? [
+          { title: "Portfolio", path: "/en/#portafolio" },
+          { title: "Our Services", path: "/en/#nuestros-servicios" },
+          { title: "About Us", path: "/en/#sobre-nosotros" },
+          { title: "FAQ", path: "/en/#preguntas-frecuentes" },
+          { title: "Contact", path: "/en/contact" }
+        ]
+      : [
+          { title: "Portafolio", path: "/#portafolio" },
+          { title: "Nuestros Servicios", path: "/#nuestros-servicios" },
+          { title: "Sobre Nosotros", path: "/#sobre-nosotros" },
+          { title: "Preguntas frecuentes", path: "/#preguntas-frecuentes" },
+          { title: "Contacto", path: "/contact" }
+        ];
+
+  const toggleLang = () => {
+    const newPath = lang === "en"
+      ? location.pathname.replace("/en", "")
+      : "/en" + location.pathname;
+  
+    navigate(newPath);
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full h-16 bg-neutral-100 z-50 flex justify-center">
       <div className="w-full max-w lg:px-0 px-6 md:max-w-5xl xl:max-w-7xl flex items-center justify-between relative">
-        <div className="absolute"><a href="/"><img className="w-[40px]" src="/img/estudio-dm-icon.png" alt=""/></a></div>
+        <div className="absolute"><HashLink to={basePath}><img className="w-[40px]" src="/img/estudio-dm-icon.png" alt=""/></HashLink></div>
         <button
             className="ml-auto lg:hidden flex flex-col gap-1"
             onClick={() => setOpen(!open)}
@@ -78,10 +102,24 @@ export default function Navbar() {
                 </li>
             ))}
             </ul>
-            <Button variant="primary" className="right-0 md:absolute" href={contactUrl} target="_blank" aria-label="Contactar por whatsApp">Contáctenos</Button>
+            <div className="right-0 md:absolute flex gap-2">
+              <button 
+                onClick={toggleLang}
+                className="flex items-center gap-2 text-black/50 font-medium hover:bg-[#E3E3E3] px-3 py-2 rounded-md transition-all duration-500 ease-in-out" 
+                aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-globe w-5 h-5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                    <path d="M2 12h20"></path>
+                  </svg>
+                <span className="text-lg">{lang === "es" ? "EN" : "ES"}</span>
+              </button>
+              <Button variant="primary">
+                <a href={contactUrl} target="_blank" aria-label={lang === "en" ? "Contact us via WhatsApp" : "Contactar por WhatsApp"}>{lang === "en" ? "Contact us" : "Contáctanos"}</a>
+              </Button>
+            </div>
         </nav>
       </div>
-
     </header>
   );
 }
