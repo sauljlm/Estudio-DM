@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Swal from 'sweetalert2';
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLanguage } from "../i18n/LanguageContext";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
@@ -7,6 +9,40 @@ import Button from "../components/Button";
 export default function Contact() {
     const { lang, translation } = useLanguage();
     const contactUrl = translation.navbar.whatsappMsg;
+    const contactRef = useRef(null);
+    const formRef = useRef(null);
+    
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+      
+        const ctx = gsap.context(() => {
+          if (!contactRef.current || !formRef.current) return;
+      
+          gsap.from(contactRef.current, {
+            x: -50,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: contactRef.current,
+              start: "top 85%",
+            },
+          });
+      
+          gsap.from(formRef.current, {
+            x: 50,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: formRef.current,
+              start: "top 85%",
+            },
+          });
+        });
+      
+        return () => ctx.revert();
+    }, []);
 
     const [userData, setUserData] = useState({
         name: "",
@@ -165,7 +201,7 @@ export default function Contact() {
         <>
             <div className="mx-auto w-[90%] xl:w-[70%] px-4 py-8 sm:px-6 lg:px-8 mt-16 md:mt-32">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                    <div className="md:py-4 h-3/4 flex flex-col justify-between">
+                    <div ref={contactRef} className="md:py-4 h-3/4 flex flex-col justify-between">
                         <div>
                             <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl">{lang === "en" ? "Contact us" : "Contáctanos"}</h2>
 
@@ -206,7 +242,7 @@ export default function Contact() {
                         </div>
                     </div>
 
-                    <form className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
+                    <form ref={formRef} className="space-y-4 rounded-lg border border-gray-300 bg-gray-100 p-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-900" htmlFor="name">{lang === "en" ? "Name" : "Nombre"}</label>
                             <input className={`${errors.name ? 'form__item--error' : ''} mt-1 w-full rounded-lg p-4 border-gray-300 focus:border-indigo-500 focus:outline-none`} id="name" name="name" type="text" placeholder={lang === "en" ? "Your name" : "Tú nombre"}  onChange={handleChange} />
